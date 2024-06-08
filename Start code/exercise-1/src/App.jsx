@@ -1,28 +1,40 @@
-import React from "react";
+import React, {useState} from "react";
 function App() {
   /* You will need to use a boolean state to manage the weather */
-
+  const [isRaining, setWeather ]= useState(true) ;
+  const [weatherTitle, setWeatherTitle] = useState("Rain Time");
+  const [backgroundColor, setBackgroundColor] = useState ("rainy")
   function onSunClick() {
-    // Complete this code when we click on Sunny Time
+    getTitle();
+    getBackgroundColor();
+    setWeather(false);
   }
 
   function onRainClick() {
-    // Complete this code when we click on Sunny Time
+    getTitle();
+    getBackgroundColor();
+    setWeather(true)
   }
 
   function getTitle() {
-    // This function manage the H1 text, depending on the weather
+    setWeatherTitle('Sun Time');
   }
 
   function getBackgroundColor() {
-    // This function manage the main class value, depending on the weather
+    if(isRaining){
+      setBackgroundColor('rainy');
+    }
+    if(!isRaining){
+      setBackgroundColor("sunny");
+      getTitle();
+    }
   }
 
   return (
-    <main>
-      <h1>TODO</h1>
-      <button>Sunny Time</button>
-      <button>Rain Time</button>
+    <main className={backgroundColor}>
+      <h1>{weatherTitle}</h1>
+      <button onClick={onSunClick} >Sunny Time</button>
+      <button onClick={onRainClick} >Rain Time</button>
     </main>
   );
 }
